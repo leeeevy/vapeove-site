@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 - Page Not Found | VAPEOVE</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=20260728">
+  <style>
+    .error-section { min-height: 70vh; display: flex; align-items: center; justify-content: center; text-align: center; }
+    .error-code { font-family: 'Orbitron', sans-serif; font-size: 8rem; font-weight: 900; background: linear-gradient(135deg, var(--cyan), var(--pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1; }
+    .error-subtitle { font-size: 1.5rem; color: var(--text); margin: 24px 0; }
+    .error-links { display: flex; gap: 16px; justify-content: center; margin-top: 32px; flex-wrap: wrap; }
+  </style>
+  <link rel="alternate" hreflang="en" href="https://vapeove.com/404" />
+  <link rel="alternate" hreflang="de" href="https://vapeove.com/de/404" />
+  <link rel="alternate" hreflang="pl" href="https://vapeove.com/pl/404" />
+  <link rel="alternate" hreflang="es" href="https://vapeove.com/es/404" />
+  <link rel="alternate" hreflang="x-default" href="https://vapeove.com/404" />
+</head>
+<body>
+  <div class="noise-bg"></div>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="logo"><div class="logo-icon">V</div><span>VAPEOVE</span></a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="eu-warehouses.html">EU Warehouses</a>
+        <a href="oem.html">OEM/ODM</a>
+        <a href="about.html">About</a>
+        <a href="faq.html">FAQ</a>
+        <a href="blog/">Blog</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="nav-right">
+        <button class="mobile-toggle" aria-label="Menu"><span></span></button>
+          <div class="lang-switcher">
+            <span class="lang-icon" aria-hidden="true">🌐</span>
+            <select id="langSelect" aria-label="Language">
+        <option value="en" selected>English</option><option value="de">Deutsch</option><option value="pl">Polski</option><option value="es">Español</option>    </select>
+          </div>
+          <script>
+          (function(){
+            var sel=document.getElementById("langSelect");
+            if(!sel) return;
+            var slug="404";
+            sel.onchange=function(){
+              var v=this.value;
+              var rel = (v==="en" ? "" : v+"/") + slug + ".html";
+              window.location.href = "/" + rel;
+            };
+          })();
+          </script>
+      </div>
+    </div>
+  </nav>
+  <div class="mobile-menu">
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="eu-warehouses.html">EU Warehouses</a>
+        <a href="oem.html">OEM/ODM</a>
+        <a href="about.html">About</a>
+        <a href="faq.html">FAQ</a>
+        <a href="blog/">Blog</a>
+        <a href="contact.html">Contact</a>
+  </div>
+
+  <section class="error-section">
+    <div class="container">
+      <div class="error-code">404</div>
+      <h1 style="margin-bottom:16px;">Page Not Found</h1>
+      <p class="error-subtitle">The page you're looking for doesn't exist or has been moved.</p>
+      <div class="error-links">
+        <a href="index.html" class="btn btn-primary">Back to Home</a>
+        <a href="products.html" class="btn btn-outline">View Products</a>
+        <a href="contact.html" class="btn btn-outline">Contact Us</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom"><span>&copy; 2026 VAPEOVE. All rights reserved.</span><span>vapeove.com</span></div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <div class="lang-switcher">
+    <select id="langSelect" aria-label="Language">
+<option value="en" selected>English</option><option value="de">Deutsch</option><option value="pl">Polski</option><option value="es">Español</option>    </select>
+  </div>
+  <script>
+  (function(){
+    var sel=document.getElementById("langSelect");
+    if(!sel) return;
+    var slug="404";
+    sel.onchange=function(){
+      var v=this.value;
+      var rel = (v==="en" ? "" : v+"/") + slug + ".html";
+      window.location.href = "/" + rel;
+    };
+  })();
+  </script>
+</body>
+</html>

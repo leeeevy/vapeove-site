@@ -1,0 +1,123 @@
+# Redirect www to non-www
+https://www.vapeove.com/* https://vapeove.com/:splat 301!
+
+# === Clean URL redirects (.html → clean path) ===
+/products.html        /products          301!
+/faq.html             /faq               301!
+/contact.html         /contact           301!
+/about.html           /about             301!
+/eu-warehouses.html   /eu-warehouses     301!
+/oem.html             /oem               301!
+/product-70k.html     /product-70k       301!
+/product-60k.html     /product-60k       301!
+/product-50k.html     /product-50k       301!
+/product-45k.html     /product-45k       301!
+
+/privacy.html         /privacy            301!
+/terms.html           /terms              301!
+
+# Internal rewrites (clean path → .html file)
+/privacy              /privacy.html       200
+/terms                /terms.html         200
+/products             /products.html      200
+/faq                  /faq.html           200
+/contact              /contact.html       200
+/about                /about.html         200
+/eu-warehouses        /eu-warehouses.html 200
+/oem                  /oem.html           200
+/product-70k          /product-70k.html   200
+/product-60k          /product-60k.html   200
+/product-50k          /product-50k.html   200
+/product-45k          /product-45k.html   200
+
+# Security headers
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+
+# === New landing pages: clean URL redirects (.html -> clean) ===
+/disposable-vape-wholesale-germany.html /disposable-vape-wholesale-germany 301!
+/bulk-disposable-vapes-spain.html /bulk-disposable-vapes-spain 301!
+/vape-wholesale-poland-local-stock.html /vape-wholesale-poland-local-stock 301!
+/disposable-vape-supplier-europe.html /disposable-vape-supplier-europe 301!
+/cheap-disposable-vapes-wholesale-eu.html /cheap-disposable-vapes-wholesale-eu 301!
+/low-moq-vape-wholesale.html /low-moq-vape-wholesale 301!
+/small-order-vape-supplier.html /small-order-vape-supplier 301!
+/vape-wholesale-10-pieces.html /vape-wholesale-10-pieces 301!
+/bulk-vapes-no-minimum-order.html /bulk-vapes-no-minimum-order 301!
+/disposable-vape-wholesale-low-minimum.html /disposable-vape-wholesale-low-minimum 301!
+
+# === New blog pages: clean URL redirects (.html -> clean) ===
+/blog/index.html                  /blog/                    301!
+/blog/eu-vape-import-customs-2026.html /blog/eu-vape-import-customs-2026 301!
+/blog/disposable-vape-wholesale-guide-2026.html /blog/disposable-vape-wholesale-guide-2026 301!
+/blog/big-puffs-comparison.html   /blog/big-puffs-comparison   301!
+/blog/customs-free-sourcing.html /blog/customs-free-sourcing 301!
+/blog/eu-wholesale-guide.html     /blog/eu-wholesale-guide     301!
+/blog/vape-wholesale-poland-local-stock.html /blog/vape-wholesale-poland-local-stock 301!
+/blog/vape-wholesale-germany-local-stock.html /blog/vape-wholesale-germany-local-stock 301!
+/blog/low-moq-vape-wholesale.html /blog/low-moq-vape-wholesale 301!
+/blog/cheap-disposable-vapes-wholesale-eu.html /blog/cheap-disposable-vapes-wholesale-eu 301!
+/blog/spain-disposable-vape-wholesale.html /blog/spain-disposable-vape-wholesale 301!
+
+# === New landing pages: internal rewrites (clean -> .html) ===
+/disposable-vape-wholesale-germany /disposable-vape-wholesale-germany.html 200
+/bulk-disposable-vapes-spain /bulk-disposable-vapes-spain.html 200
+/vape-wholesale-poland-local-stock /vape-wholesale-poland-local-stock.html 200
+/disposable-vape-supplier-europe /disposable-vape-supplier-europe.html 200
+/cheap-disposable-vapes-wholesale-eu /cheap-disposable-vapes-wholesale-eu.html 200
+/low-moq-vape-wholesale /low-moq-vape-wholesale.html 200
+/small-order-vape-supplier /small-order-vape-supplier.html 200
+/vape-wholesale-10-pieces /vape-wholesale-10-pieces.html 200
+/bulk-vapes-no-minimum-order /bulk-vapes-no-minimum-order.html 200
+/disposable-vape-wholesale-low-minimum /disposable-vape-wholesale-low-minimum.html 200
+
+# === New blog pages: internal rewrites (clean -> .html) ===
+/blog/                             /blog/index.html            200
+/blog/eu-vape-import-customs-2026 /blog/eu-vape-import-customs-2026.html 200
+/blog/disposable-vape-wholesale-guide-2026 /blog/disposable-vape-wholesale-guide-2026.html 200
+/blog/big-puffs-comparison        /blog/big-puffs-comparison.html   200
+/blog/customs-free-sourcing       /blog/customs-free-sourcing.html 200
+/blog/eu-wholesale-guide          /blog/eu-wholesale-guide.html     200
+/blog/vape-wholesale-poland-local-stock  /blog/vape-wholesale-poland-local-stock.html 200
+/blog/vape-wholesale-germany-local-stock /blog/vape-wholesale-germany-local-stock.html 200
+/blog/low-moq-vape-wholesale      /blog/low-moq-vape-wholesale.html 200
+/blog/cheap-disposable-vapes-wholesale-eu /blog/cheap-disposable-vapes-wholesale-eu.html 200
+/blog/spain-disposable-vape-wholesale     /blog/spain-disposable-vape-wholesale.html 200
+
+# === i18n blog rewrites ===
+/de/blog/                          /de/blog/index.html         200
+/pl/blog/                          /pl/blog/index.html         200
+/es/blog/                          /es/blog/index.html         200
+/de/blog/eu-vape-import-customs-2026  /de/blog/eu-vape-import-customs-2026.html 200
+/pl/blog/eu-vape-import-customs-2026  /pl/blog/eu-vape-import-customs-2026.html 200
+/es/blog/eu-vape-import-customs-2026  /es/blog/eu-vape-import-customs-2026.html 200
+/de/blog/disposable-vape-wholesale-guide-2026 /de/blog/disposable-vape-wholesale-guide-2026.html 200
+/pl/blog/disposable-vape-wholesale-guide-2026 /pl/blog/disposable-vape-wholesale-guide-2026.html 200
+/es/blog/disposable-vape-wholesale-guide-2026 /es/blog/disposable-vape-wholesale-guide-2026.html 200
+/de/blog/big-puffs-comparison      /de/blog/big-puffs-comparison.html 200
+/pl/blog/big-puffs-comparison      /pl/blog/big-puffs-comparison.html 200
+/es/blog/big-puffs-comparison      /es/blog/big-puffs-comparison.html 200
+/de/blog/customs-free-sourcing    /de/blog/customs-free-sourcing.html 200
+/pl/blog/customs-free-sourcing    /pl/blog/customs-free-sourcing.html 200
+/es/blog/customs-free-sourcing    /es/blog/customs-free-sourcing.html 200
+/de/blog/eu-wholesale-guide        /de/blog/eu-wholesale-guide.html 200
+/pl/blog/eu-wholesale-guide        /pl/blog/eu-wholesale-guide.html 200
+/es/blog/eu-wholesale-guide        /es/blog/eu-wholesale-guide.html 200
+/de/blog/vape-wholesale-poland-local-stock  /de/blog/vape-wholesale-poland-local-stock.html 200
+/pl/blog/vape-wholesale-poland-local-stock  /pl/blog/vape-wholesale-poland-local-stock.html 200
+/es/blog/vape-wholesale-poland-local-stock  /es/blog/vape-wholesale-poland-local-stock.html 200
+/de/blog/vape-wholesale-germany-local-stock /de/blog/vape-wholesale-germany-local-stock.html 200
+/pl/blog/vape-wholesale-germany-local-stock /pl/blog/vape-wholesale-germany-local-stock.html 200
+/es/blog/vape-wholesale-germany-local-stock /es/blog/vape-wholesale-germany-local-stock.html 200
+/de/blog/low-moq-vape-wholesale     /de/blog/low-moq-vape-wholesale.html 200
+/pl/blog/low-moq-vape-wholesale     /pl/blog/low-moq-vape-wholesale.html 200
+/es/blog/low-moq-vape-wholesale     /es/blog/low-moq-vape-wholesale.html 200
+/de/blog/cheap-disposable-vapes-wholesale-eu /de/blog/cheap-disposable-vapes-wholesale-eu.html 200
+/pl/blog/cheap-disposable-vapes-wholesale-eu /pl/blog/cheap-disposable-vapes-wholesale-eu.html 200
+/es/blog/cheap-disposable-vapes-wholesale-eu /es/blog/cheap-disposable-vapes-wholesale-eu.html 200
+/de/blog/spain-disposable-vape-wholesale   /de/blog/spain-disposable-vape-wholesale.html 200
+/pl/blog/spain-disposable-vape-wholesale   /pl/blog/spain-disposable-vape-wholesale.html 200
+/es/blog/spain-disposable-vape-wholesale   /es/blog/spain-disposable-vape-wholesale.html 200
