@@ -11,8 +11,8 @@
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=20260823">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=20260823b">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
@@ -125,6 +125,7 @@
             var slug="index";
             sel.onchange=function(){
               var v=this.value;
+              try { localStorage.setItem("vapeove-lang", v); } catch(e){}
               var rel = (v==="en" ? "" : v+"/") + slug + ".html";
               window.location.href = "/" + rel;
             };

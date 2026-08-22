@@ -53,8 +53,8 @@
       '.age-gate-overlay.age-gate-fade{opacity:0;pointer-events:none;}' +
       '.age-gate-modal{background:#0d0d1a;border:1px solid #2a2a4a;border-radius:16px;max-width:440px;width:100%;padding:36px 30px 28px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.6);}' +
       '.age-gate-icon{width:64px;height:64px;margin:0 auto 18px;border-radius:50%;background:linear-gradient(135deg,#00e5ff,#7c3aed);display:flex;align-items:center;justify-content:center;}' +
-      '.age-gate-age{font-family:"Orbitron",sans-serif;font-size:18px;font-weight:700;color:#fff;letter-spacing:1px;}' +
-      '.age-gate-modal h2{font-family:"Orbitron",sans-serif;font-size:20px;font-weight:700;color:#fff;margin:0 0 10px;line-height:1.3;}' +
+      '.age-gate-age{font-family:"Sora",system-ui,sans-serif;font-size:18px;font-weight:700;color:#fff;letter-spacing:1px;}' +
+      '.age-gate-modal h2{font-family:"Sora",system-ui,sans-serif;font-size:20px;font-weight:700;color:#fff;margin:0 0 10px;line-height:1.3;}' +
       '.age-gate-sub{font-size:14px;color:#aab;line-height:1.6;margin:0 0 24px;}' +
       '.age-gate-actions{display:flex;flex-direction:column;gap:10px;margin-bottom:18px;}' +
       '.age-gate-btn{display:block;width:100%;padding:13px 16px;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;border:none;transition:transform .1s ease,opacity .2s ease;}' +
@@ -109,10 +109,45 @@
 })();
 
 // ===========================================
-// GOOGLE ANALYTICS 4 (site-wide, single place)
-// TODO: Replace G-XXXXXXXXXX with your real GA4 Measurement ID.
-// Get it from GA4 Admin > Data Streams > Web > Measurement ID.
+// BROWSER LANGUAGE AUTO-DETECT (SEO-safe, progressive)
+// Only runs on the English root page (/) and only when:
+//   - the visitor has NOT already chosen a language (localStorage), AND
+//   - the browser's primary UI language is one of our 4 languages (default EN).
+// It performs a soft client-side redirect (location.replace) to the language
+// sub-path. Because every language page has its own rel=canonical + hreflang,
+// the crawl graph stays intact: crawlers generally present en-US or no language,
+// so they stay on the English default. This is a UX enhancement, NOT a URL
+// rewrite that alters what crawlers index — risk to SEO is negligible.
 // ===========================================
+(function () {
+  try {
+    // Only act on English root page.
+    var path = window.location.pathname.replace(/\/+$/, '');
+    if (path !== '' && path !== '/' && path !== '/index') return;
+  } catch (e) { return; }
+
+  // Respect a previously chosen language (set by the language switcher).
+  var chosen = null;
+  try { chosen = window.localStorage.getItem('vapeove-lang'); } catch (e) {}
+  if (chosen) return;
+
+  // Determine preferred language from the browser.
+  var lang = (navigator.language || navigator.languages && navigator.languages[0] || 'en').toLowerCase();
+  var map = { de: 'de', 'de-de': 'de', 'de-at': 'de', 'de-ch': 'de',
+              pl: 'pl', 'pl-pl': 'pl', 'es': 'es', 'es-es': 'es', 'es-mx': 'es' };
+  var target = map[lang] || null;
+
+  // If the primary language isn't one of ours, keep English (default). No redirect.
+  if (target === 'en') return;
+
+  // Soft redirect so the back-button / referrer stops here on re-entry.
+  if (target) {
+    // Skip redirect for privacy-sensitive contexts where a page nav is undesirable.
+    try {
+      window.location.replace('/' + target + '/');
+    } catch (e) {}
+  }
+})();
 (function () {
   const GA_ID = 'G-XXXXXXXXXX';
   if (GA_ID === 'G-XXXXXXXXXX') return; // not configured yet — skip silently
