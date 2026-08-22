@@ -2,6 +2,113 @@
 // Mobile menu, scroll animations, language switch
 
 // ===========================================
+// AGE VERIFICATION GATE (site-wide, single place)
+// Injected here so it runs immediately (before DOMContentLoaded) to avoid flash.
+// Store consent in localStorage so returning visitors skip it.
+// ===========================================
+(function () {
+  var storage = null;
+  try { storage = window.localStorage; } catch (e) { storage = null; }
+  var KEY = 'vapeove-age-verified';
+  var THIRTY_DAYS = 30 * 24 * 60 * 60 * 1000;
+
+  // If the visitor was redirected here as "under 21", force re-show and clear consent.
+  var params = new URLSearchParams(window.location.search || '');
+  var deniedNow = params.get('agegate') === 'denied';
+  if (deniedNow && storage) {
+    try { storage.removeItem(KEY); } catch (e) {}
+  }
+
+  // Already verified within 30 days → skip gate entirely.
+  if (storage && !deniedNow) {
+    var stored = storage.getItem(KEY);
+    if (stored) {
+      var ts = parseInt(stored, 10);
+      if (!isNaN(ts) && (Date.now() - ts) < THIRTY_DAYS) return;
+    }
+  }
+
+  function buildOverlay() {
+    var ov = document.createElement('div');
+    ov.className = 'age-gate-overlay';
+    ov.setAttribute('role', 'dialog');
+    ov.setAttribute('aria-modal', 'true');
+    ov.setAttribute('aria-labelledby', 'age-gate-title');
+    ov.innerHTML =
+      '<div class="age-gate-modal" role="document">' +
+      '  <div class="age-gate-icon"><span class="age-gate-age">21+</span></div>' +
+      '  <h2 id="age-gate-title">Are you 21 or older?</h2>' +
+      '  <p class="age-gate-sub">This website sells vaping products intended for adults only. You must be at least 21 years old to enter.</p>' +
+      '  <div class="age-gate-actions">' +
+      '    <button type="button" class="age-gate-btn accept" id="age-gate-accept">I am 21 or older — Enter</button>' +
+      '    <button type="button" class="age-gate-btn deny" id="age-gate-deny">I am under 21 — Leave</button>' +
+      '  </div>' +
+      '  <p class="age-gate-foot">Nicotine is an addictive substance. This product is for adults only.</p>' +
+      '</div>';
+
+    // Self-contained inline styles so the gate renders correctly even before style.css loads.
+    var css = document.createElement('style');
+    css.textContent =
+      '.age-gate-overlay{position:fixed;inset:0;z-index:999999;background:rgba(5,5,12,.94);display:flex;align-items:center;justify-content:center;padding:20px;transition:opacity .22s ease;}' +
+      '.age-gate-overlay.age-gate-fade{opacity:0;pointer-events:none;}' +
+      '.age-gate-modal{background:#0d0d1a;border:1px solid #2a2a4a;border-radius:16px;max-width:440px;width:100%;padding:36px 30px 28px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.6);}' +
+      '.age-gate-icon{width:64px;height:64px;margin:0 auto 18px;border-radius:50%;background:linear-gradient(135deg,#00e5ff,#7c3aed);display:flex;align-items:center;justify-content:center;}' +
+      '.age-gate-age{font-family:"Orbitron",sans-serif;font-size:18px;font-weight:700;color:#fff;letter-spacing:1px;}' +
+      '.age-gate-modal h2{font-family:"Orbitron",sans-serif;font-size:20px;font-weight:700;color:#fff;margin:0 0 10px;line-height:1.3;}' +
+      '.age-gate-sub{font-size:14px;color:#aab;line-height:1.6;margin:0 0 24px;}' +
+      '.age-gate-actions{display:flex;flex-direction:column;gap:10px;margin-bottom:18px;}' +
+      '.age-gate-btn{display:block;width:100%;padding:13px 16px;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;border:none;transition:transform .1s ease,opacity .2s ease;}' +
+      '.age-gate-btn:active{transform:scale(.98);}' +
+      '.age-gate-btn.accept{background:#00e5ff;color:#031018;}' +
+      '.age-gate-btn.accept:hover{opacity:.9;}' +
+      '.age-gate-btn.deny{background:transparent;border:1px solid #3a3a5a;color:#98a;}' +
+      '.age-gate-btn.deny:hover{background:#1a1a30;color:#cfd;}' +
+      '.age-gate-foot{font-size:11px;color:#667;margin:0;line-height:1.5;}';
+
+    ov.insertBefore(css, ov.firstChild);
+    return ov;
+  }
+
+  var overlay = buildOverlay();
+  var accepted = false;
+  function blockScroll() {
+    document.documentElement.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden';
+  }
+  function unblockScroll() {
+    document.documentElement.style.overflow = '';
+    document.body.style.overflow = '';
+  }
+  function accept() {
+    if (accepted) return;
+    accepted = true;
+    if (storage) { try { storage.setItem(KEY, String(Date.now())); } catch (e) {} }
+    overlay.classList.add('age-gate-fade');
+    setTimeout(function () { overlay.remove(); unblockScroll(); }, 220);
+  }
+  function deny() {
+    // Clip consent and send to a neutral adult-safety page via a query flag.
+    try {
+      var url = window.location.href;
+      var sep = url.indexOf('?') > -1 ? '&' : '?';
+      window.location.href = url + sep + 'agegate=denied';
+    } catch (e) {
+      document.body.innerHTML = '<div style="color:#fff;text-align:center;padding:80px 20px;font-family:sans-serif;">You must be 21 or older to access this site.</div>';
+    }
+  }
+
+  // main.js is loaded synchronously at the end of <body>, so the DOM is ready.
+  blockScroll();
+  document.body.appendChild(overlay);
+  document.addEventListener('DOMContentLoaded', function () {
+    var acceptBtn = document.getElementById('age-gate-accept');
+    var denyBtn = document.getElementById('age-gate-deny');
+    if (acceptBtn) acceptBtn.addEventListener('click', accept);
+    if (denyBtn) denyBtn.addEventListener('click', deny);
+  });
+})();
+
+// ===========================================
 // GOOGLE ANALYTICS 4 (site-wide, single place)
 // TODO: Replace G-XXXXXXXXXX with your real GA4 Measurement ID.
 // Get it from GA4 Admin > Data Streams > Web > Measurement ID.
@@ -131,8 +238,23 @@ document.addEventListener('DOMContentLoaded', function() {
   const lbCap = lightbox.querySelector('.lightbox-caption');
   const lbClose = lightbox.querySelector('.lightbox-close');
 
+  // P0-2: Map a (compressed) thumbnail src to its full-resolution original.
+  // Thumbnails live at images/x.jpg / ../../images/x.jpg; originals live at images/full/x.jpg.
+  // Returns the full path when a matching full image exists, otherwise the original src.
+  function fullSrcFor(src) {
+    if (!src) return src;
+    var name = src.split('/').pop().split('?')[0];
+    if (!name) return src;
+    // Skip if it's already in full/ or an external URL.
+    if (src.indexOf('images/full/') > -1 || src.indexOf('http') === 0) return src;
+    var base = src.slice(0, src.lastIndexOf('/'));
+    // Handle paths like "images/x.jpg", "../images/x.jpg", "../../images/x.jpg".
+    return base + '/full/' + name;
+  }
+
   function openLightbox(src, caption) {
-    lbImg.src = src;
+    // P0-2: load the full-resolution original when opening the lightbox.
+    lbImg.src = fullSrcFor(src) || src;
     lbImg.alt = caption || 'Product image';
     lbCap.textContent = caption || '';
     lightbox.classList.add('open');
