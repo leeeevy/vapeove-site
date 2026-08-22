@@ -2269,9 +2269,10 @@
   </url>
   <url>
     <loc>https://vapeove.com/es/vape-shops-krakow-wholesale-supplier</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-08-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="de" href="https://vapeove.com/de/vape-shops-krakow-wholesale-supplier" />
     <xhtml:link rel="alternate" hreflang="en" href="https://vapeove.com/vape-shops-krakow-wholesale-supplier" />
     <xhtml:link rel="alternate" hreflang="es" href="https://vapeove.com/es/vape-shops-krakow-wholesale-supplier" />
     <xhtml:link rel="alternate" hreflang="pl" href="https://vapeove.com/pl/vape-shops-krakow-wholesale-supplier" />
@@ -3247,9 +3248,10 @@
   </url>
   <url>
     <loc>https://vapeove.com/pl/vape-shops-krakow-wholesale-supplier</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-08-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="de" href="https://vapeove.com/de/vape-shops-krakow-wholesale-supplier" />
     <xhtml:link rel="alternate" hreflang="en" href="https://vapeove.com/vape-shops-krakow-wholesale-supplier" />
     <xhtml:link rel="alternate" hreflang="es" href="https://vapeove.com/es/vape-shops-krakow-wholesale-supplier" />
     <xhtml:link rel="alternate" hreflang="pl" href="https://vapeove.com/pl/vape-shops-krakow-wholesale-supplier" />
@@ -3565,9 +3567,10 @@
   </url>
   <url>
     <loc>https://vapeove.com/vape-shops-krakow-wholesale-supplier</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-08-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="de" href="https://vapeove.com/de/vape-shops-krakow-wholesale-supplier" />
     <xhtml:link rel="alternate" hreflang="en" href="https://vapeove.com/vape-shops-krakow-wholesale-supplier" />
     <xhtml:link rel="alternate" hreflang="es" href="https://vapeove.com/es/vape-shops-krakow-wholesale-supplier" />
     <xhtml:link rel="alternate" hreflang="pl" href="https://vapeove.com/pl/vape-shops-krakow-wholesale-supplier" />
@@ -3726,5 +3729,16 @@
     <xhtml:link rel="alternate" hreflang="es" href="https://vapeove.com/es/vape-wholesale-poland-local-stock" />
     <xhtml:link rel="alternate" hreflang="pl" href="https://vapeove.com/pl/vape-wholesale-poland-local-stock" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://vapeove.com/vape-wholesale-poland-local-stock" />
+  </url>
+  <url>
+    <loc>https://vapeove.com/de/vape-shops-krakow-wholesale-supplier</loc>
+    <lastmod>2026-08-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="de" href="https://vapeove.com/de/vape-shops-krakow-wholesale-supplier" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://vapeove.com/vape-shops-krakow-wholesale-supplier" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://vapeove.com/es/vape-shops-krakow-wholesale-supplier" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://vapeove.com/pl/vape-shops-krakow-wholesale-supplier" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vapeove.com/vape-shops-krakow-wholesale-supplier" />
   </url>
 </urlset>
