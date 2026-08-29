@@ -149,7 +149,7 @@
   }
 })();
 (function () {
-  const GA_ID = 'G-XXXXXXXXXX';
+  const GA_ID = 'G-FHYV8R12Q7';
   if (GA_ID === 'G-XXXXXXXXXX') return; // not configured yet — skip silently
   window.dataLayer = window.dataLayer || [];
   function gtag() { dataLayer.push(arguments); }
