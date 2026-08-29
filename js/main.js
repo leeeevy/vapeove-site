@@ -162,11 +162,119 @@
   gtag('config', GA_ID);
 })();
 
+// ===========================================
+// GA4 EVENT TRACKING — browsing & inquiry funnel
+// Each helper is a no-op when gtag isn't loaded (e.g. before GA script arrives).
+// Product identity is derived from the page itself (h1 / og:title / data-title),
+// so this works across all 4 language subdirs without per-page code.
+// ===========================================
 document.addEventListener('DOMContentLoaded', function() {
+  var pageLang = (function () {
+    var p = window.location.pathname;
+    if (p.indexOf('/de') === 0) return 'de';
+    if (p.indexOf('/pl') === 0) return 'pl';
+    if (p.indexOf('/es') === 0) return 'es';
+    return 'en';
+  })();
+  var currency = 'EUR';
+
+  // Track events only when GA4 is actually configured + reachable.
+  function track() {
+    if (typeof window.gtag !== 'function') return;
+    try { window.gtag.apply(null, Array.prototype.slice.call(arguments)); } catch (e) {}
+  }
+
+  // Resolve the current page's product name (live on product detail pages).
+  function productName() {
+    var h1 = document.querySelector('h1');
+    if (h1 && h1.textContent.trim()) return h1.textContent.trim();
+    var og = document.querySelector('meta[property="og:title"]');
+    if (og && og.content && og.content.indexOf('VAPEOVE') === -1) return og.content.trim();
+    return (document.title || '').replace(/\s*\|\s*VAPEOVE.*$/i, '').trim() || document.title;
+  }
+
+  function isProductPage() {
+    return /\/product-/.test(window.location.pathname);
+  }
+  function isProductListPage() {
+    return /\/products$|\/products\.html$|\/products\//.test(window.location.pathname);
+  }
+
+  // --- 1) view_item_list: fired on products listing + homepage self-serving ---
+  if (isProductListPage()) {
+    track('event', 'view_item_list', {
+      currency: currency,
+      item_list_name: pageLang + '_products',
+      items: Array.prototype.slice.call(document.querySelectorAll('.product-card')).map(function (card) {
+        var title = card.querySelector('h3');
+        var link = card.querySelector('a');
+        return {
+          item_name: title ? title.textContent.trim() : '',
+          item_id: link ? link.getAttribute('href').split('/').pop().replace('.html', '') : '',
+          item_category: 'disposable_vape'
+        };
+      })
+    });
+  }
+
+  // --- 2) view_item: product detail page ---
+  if (isProductPage()) {
+    var itemId = window.location.pathname.split('/').pop().replace(/\.html$/, '') || 'unknown';
+    track('event', 'view_item', {
+      currency: currency,
+      value: 1,
+      items: [{ item_id: itemId, item_name: productName(), item_category: 'disposable_vape' }]
+    });
+  }
+
+  // --- 3) select_item: clicking a product card → treat as item selection ---
+  document.querySelectorAll('.product-card a').forEach(function (link) {
+    link.addEventListener('click', function () {
+      var card = link.closest('.product-card');
+      var title = card && card.querySelector('h3');
+      track('event', 'select_item', {
+        currency: currency,
+        items: [{
+          item_name: title ? title.textContent.trim() : '',
+          item_id: link.getAttribute('href').split('/').pop().replace('.html', ''),
+          item_category: 'disposable_vape'
+        }]
+      });
+    });
+  });
+
+  // --- 4) begin_checkout: user focuses an inquiry/contact form (wholesale intent) ---
+  var leadForms = document.querySelectorAll('#inquiry-form, form[data-inquiry], form[data-lead]');
+  leadForms.forEach(function (form) {
+    form.addEventListener('focusin', function (e) {
+      if (form.dataset.sent) return;
+      form.dataset.sent = '1';
+      track('event', 'begin_checkout', { currency: currency, form_name: form.getAttribute('id') || 'lead' });
+    });
+  });
+
+  // --- 5) outbound_click: WhatsApp / Telegram / mailto links (high-intent contact) ---
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest ? e.target.closest('a[href]') : null;
+    if (!a) return;
+    var href = a.getAttribute('href') || '';
+    var isWhatsApp = /wa\.me|whatsapp/i.test(href);
+    var isTelegram = /t\.me|telegram/i.test(href);
+    var isEmail = /^mailto:/i.test(href);
+    if (isWhatsApp || isTelegram || isEmail) {
+      var channel = isWhatsApp ? 'whatsapp' : (isTelegram ? 'telegram' : 'email');
+      track('event', 'outbound_click', {
+        currency: currency,
+        link_channel: channel,
+        link_domain: a.hostname || '',
+        form_name: a.closest('form') ? (a.closest('form').id || 'lead') : ''
+      });
+    }
+  });
+
   // Mobile menu toggle
   const mobileToggle = document.querySelector('.mobile-toggle');
   const mobileMenu = document.querySelector('.mobile-menu');
-  
   if (mobileToggle && mobileMenu) {
     mobileToggle.addEventListener('click', function() {
       mobileMenu.classList.toggle('open');
@@ -438,11 +546,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
       const product = (inquiryForm.querySelector('[name=product]') || {}).value || 'unspecified';
       const country = (inquiryForm.querySelector('[name=country]') || {}).value || 'unspecified';
-      if (typeof gtag === 'function') {
-        gtag('event', 'generate_lead', {
-          currency: 'EUR', value: 1, form_name: 'inquiry', product, country
-        });
-      }
+      const formType = isProductPage() ? 'product_inquiry' : 'contact';
+      track('event', 'generate_lead', {
+        currency: 'EUR',
+        value: 1,
+        form_name: 'inquiry',
+        form_type: formType,
+        product: product,
+        country: country,
+        page_language: pageLang
+      });
 
       const data = new FormData(inquiryForm);
       data.append('form-name', 'inquiry');
