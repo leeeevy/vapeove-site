@@ -12,7 +12,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=20260823b">
+  <link rel="stylesheet" href="css/style.css?v=20260825c">
+  <link rel="stylesheet" href="css/cyberpunk.css?v=20260825c">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
@@ -52,7 +53,7 @@
   }
   </script>
 
-  <!-- Google Analytics 4 is initialized in js/main.js (one place, site-wide). Replace G-XXXXXXXXXX with your real Measurement ID. -->
+  <!-- Google Analytics 4 is initialized in js/main.js (one place, site-wide). Replace G-FHYV8R12Q7 with your real Measurement ID. -->
 
   <script type="application/ld+json">
 {
@@ -87,29 +88,59 @@
     }
   }
   </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Review",
+    "itemReviewed": { "@type": "Organization", "name": "VAPEOVE" },
+    "author": { "@type": "Person", "name": "Germany Customer" },
+    "reviewBody": "Shop shelf fully stocked with full HIFANCY range.",
+    "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Review",
+    "itemReviewed": { "@type": "Organization", "name": "VAPEOVE" },
+    "author": { "@type": "Person", "name": "Sweden Customer" },
+    "reviewBody": "Super fast delivery with DHL. Will order more.",
+    "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Review",
+    "itemReviewed": { "@type": "Organization", "name": "VAPEOVE" },
+    "author": { "@type": "Person", "name": "Spain Customer" },
+    "reviewBody": "Beautiful my brother, super fast and in perfect condition!",
+    "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" }
+  }
+  </script>
 
 </head>
-<body>
+<body class="cyberpunk-home">
   <div class="noise-bg"></div>
   <!-- Breadcrumb -->
   <nav class="breadcrumb" aria-label="Breadcrumb">
     <div class="container">
-      <a href="index.html">Home</a> &rsaquo; <span>Big Puffs Vape Wholesale Europe</span>
+      <a href="./">Home</a> &rsaquo; <span>Big Puffs Vape Wholesale Europe</span>
     </div>
   </nav>
   <!-- Navigation -->
             <nav class="nav">
     <div class="container nav-inner">
-      <a href="index.html" class="logo"><div class="logo-icon">V</div><span>VAPEOVE</span></a>
+      <a href="./" class="logo"><div class="logo-icon">V</div><span>VAPEOVE</span></a>
       <div class="nav-links">
-        <a href="index.html" class="active">Home</a>
-        <a href="products.html">Products</a>
-        <a href="eu-warehouses.html">EU Warehouses</a>
-        <a href="oem.html">OEM/ODM</a>
-        <a href="about.html">About</a>
-        <a href="faq.html">FAQ</a>
+        <a href="./" class="active">Home</a>
+        <a href="products">Products</a>
+        <a href="eu-warehouses">EU Warehouses</a>
+        <a href="oem">OEM/ODM</a>
+        <a href="about">About</a>
+        <a href="faq">FAQ</a>
         <a href="blog/">Blog</a>
-        <a href="contact.html">Contact</a>
+        <a href="contact">Contact</a>
       </div>
       <div class="nav-right">
         <button class="mobile-toggle" aria-label="Menu"><span></span></button>
@@ -125,7 +156,6 @@
             var slug="index";
             sel.onchange=function(){
               var v=this.value;
-              try { localStorage.setItem("vapeove-lang", v); } catch(e){}
               var rel = (v==="en" ? "" : v+"/") + slug + ".html";
               window.location.href = "/" + rel;
             };
@@ -135,14 +165,14 @@
     </div>
   </nav>
   <div class="mobile-menu">
-        <a href="index.html" class="active">Home</a>
-        <a href="products.html">Products</a>
-        <a href="eu-warehouses.html">EU Warehouses</a>
-        <a href="oem.html">OEM/ODM</a>
-        <a href="about.html">About</a>
-        <a href="faq.html">FAQ</a>
+        <a href="./" class="active">Home</a>
+        <a href="products">Products</a>
+        <a href="eu-warehouses">EU Warehouses</a>
+        <a href="oem">OEM/ODM</a>
+        <a href="about">About</a>
+        <a href="faq">FAQ</a>
         <a href="blog/">Blog</a>
-        <a href="contact.html">Contact</a>
+        <a href="contact">Contact</a>
   </div>
 
   <!-- Hero Section — Cyberpunk Cityscape -->
@@ -160,7 +190,7 @@
           10 pcs/box MOQ. Same flavor per box. 2-3 days EU delivery. <strong style="color:#39FF14">DDP delivery.</strong>
         </p>
         <div class="hero-buttons" style="justify-content:center;">
-          <a href="products.html" class="btn btn-primary">VIEW PRODUCTS</a>
+          <a href="products" class="btn btn-primary">VIEW PRODUCTS</a>
           <a href="https://wa.me/8618902484114?text=Hi%2C%20I%27m%20interested%20in%20wholesale%20vapes%20from%20your%20EU%20warehouse.%20Please%20send%20price%20list." class="btn btn-outline" target="_blank">GET QUOTE VIA WHATSAPP</a>
         </div>
         <div class="hud-stats" style="justify-content:center;">
@@ -203,7 +233,7 @@
 
   <!-- Promo Banner Strip — Full Width -->
   <div class="promo-strip">
-    <img src="images/promo-strip-1.jpg" alt="HIFANCY Space 50000 Puffs - 10 Flavors 1.0Ω Mesh Coil 650mAh Type-C Port - Europe Wholesale Disposable Vape" loading="lazy">
+    <img src="images/promo-strip-1.jpg" alt="HIFANCY Space 50000 Puffs - 10 Flavors 1.0Ω Mesh Coil 650mAh Type-C Port - Europe Wholesale Disposable Vape">
     <div class="promo-strip-gradient"></div>
   </div>
 
@@ -224,7 +254,7 @@
         <div class="product-card featured fade-up">
           <div class="product-image">
             <span class="stock-badge" style="position:absolute;top:12px;left:12px;z-index:2;">★ FLAGSHIP</span>
-            <img src="images/product-70k.jpg" alt="HIFANCY SUPER 70000 Puffs Disposable Vape Wholesale Europe - Smart Display 10 Flavors EU Stock" title="SUPER 70K Flagship Vape" loading="lazy">
+            <img src="images/product-70k.jpg" alt="HIFANCY SUPER 70000 Puffs Disposable Vape Wholesale Europe - Smart Display 10 Flavors EU Stock" title="SUPER 70K Flagship Vape">
             <div class="zoom-overlay"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35M11 8v6M8 11h6"/></svg></div>
           </div>
           <div class="product-info">
@@ -236,9 +266,9 @@
             </div>
             <span class="moq-highlight">10 pcs/box · Same Flavor · EU Stock</span>
             <div class="pc-price-wrap">
-              <span class="pc-price-contact">€5.00 – €8.00 / pc</span>
+              <span class="pc-price-contact">Contact for Price</span>
             </div>
-            <a href="product-70k.html" class="product-link">VIEW DETAILS →</a>
+            <a href="product-70k" class="product-link">VIEW DETAILS →</a>
           </div>
         </div>
 
@@ -246,7 +276,7 @@
         <div class="product-card fade-up">
           <div class="product-image">
             <span class="stock-badge" style="position:absolute;top:12px;left:12px;z-index:2;">EU STOCK</span>
-            <img src="images/product-60k.jpg" alt="HIFANCY TWIN MAX 60000 Puffs Disposable Vape Wholesale Europe - 10 Dual Flavors Adjustable Airflow" title="HIFANCY 60K TWIN MAX Dual Flavor" loading="lazy">
+            <img src="images/product-60k.jpg" alt="HIFANCY TWIN MAX 60000 Puffs Disposable Vape Wholesale Europe - 10 Dual Flavors Adjustable Airflow" title="HIFANCY 60K TWIN MAX Dual Flavor">
             <div class="zoom-overlay"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35M11 8v6M8 11h6"/></svg></div>
           </div>
           <div class="product-info">
@@ -258,9 +288,9 @@
             </div>
             <span class="moq-highlight">10 pcs/box · Same Flavor · EU Stock</span>
             <div class="pc-price-wrap">
-              <span class="pc-price-contact">€4.50 – €7.00 / pc</span>
+              <span class="pc-price-contact">Contact for Price</span>
             </div>
-            <a href="product-60k.html" class="product-link">VIEW DETAILS →</a>
+            <a href="product-60k" class="product-link">VIEW DETAILS →</a>
           </div>
         </div>
 
@@ -268,7 +298,7 @@
         <div class="product-card fade-up">
           <div class="product-image">
             <span class="stock-badge" style="position:absolute;top:12px;left:12px;z-index:2;">BEST SELLER</span>
-            <img src="images/product-50k.jpg" alt="HIFANCY Space 50000 Puffs Disposable Vape Wholesale Europe - 10 Flavors Box Design Best Seller" title="HIFANCY Space 50K Best Seller" loading="lazy">
+            <img src="images/product-50k.jpg" alt="HIFANCY Space 50000 Puffs Disposable Vape Wholesale Europe - 10 Flavors Box Design Best Seller" title="HIFANCY Space 50K Best Seller">
             <div class="zoom-overlay"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35M11 8v6M8 11h6"/></svg></div>
           </div>
           <div class="product-info">
@@ -280,9 +310,9 @@
             </div>
             <span class="moq-highlight">10 pcs/box · Same Flavor · EU Stock</span>
             <div class="pc-price-wrap">
-              <span class="pc-price-contact">€4.00 – €6.50 / pc</span>
+              <span class="pc-price-contact">Contact for Price</span>
             </div>
-            <a href="product-50k.html" class="product-link">VIEW DETAILS →</a>
+            <a href="product-50k" class="product-link">VIEW DETAILS →</a>
           </div>
         </div>
 
@@ -290,7 +320,7 @@
         <div class="product-card fade-up">
           <div class="product-image">
             <span class="stock-badge" style="position:absolute;top:12px;left:12px;z-index:2;">BEST VALUE</span>
-            <img src="images/product-45k.jpg" alt="HIFANCY Dream 45000 Puffs Disposable Vape Wholesale Europe - 12 Flavors 650mAh Type-C Best Value" title="HIFANCY Dream 45K Best Value" loading="lazy">
+            <img src="images/product-45k.jpg" alt="HIFANCY Dream 45000 Puffs Disposable Vape Wholesale Europe - 12 Flavors 650mAh Type-C Best Value" title="HIFANCY Dream 45K Best Value">
             <div class="zoom-overlay"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35M11 8v6M8 11h6"/></svg></div>
           </div>
           <div class="product-info">
@@ -302,9 +332,9 @@
             </div>
             <span class="moq-highlight">10 pcs/box · Same Flavor · EU Stock</span>
             <div class="pc-price-wrap">
-              <span class="pc-price-contact">€3.50 – €5.50 / pc</span>
+              <span class="pc-price-contact">Contact for Price</span>
             </div>
-            <a href="product-45k.html" class="product-link">VIEW DETAILS →</a>
+            <a href="product-45k" class="product-link">VIEW DETAILS →</a>
           </div>
         </div>
       </div>
@@ -354,7 +384,7 @@
         </div>
       </div>
       <div style="text-align:center;margin-top:40px;">
-        <img src="images/eu-warehouse.jpg" alt="VAPEOVE EU Warehouse Germany Poland Spain - Disposable Vape Local Stock DDP Shipping" title="EU 3-Country Warehouse Network" style="max-width:100%;border-radius:var(--radius-lg);border:1px solid var(--border);" loading="lazy">
+        <img src="images/eu-warehouse.jpg" alt="VAPEOVE EU Warehouse Germany Poland Spain - Disposable Vape Local Stock DDP Shipping" title="EU 3-Country Warehouse Network" style="max-width:100%;border-radius:var(--radius-lg);border:1px solid var(--border);">
       </div>
       <div class="shipping-logos">
         <div class="shipping-logo">DHL Express</div>
@@ -471,7 +501,7 @@
         </div>
       </div>
       <div style="text-align:center;margin-top:40px;">
-        <a href="contact.html" class="btn btn-primary">Discuss OEM/ODM Project</a>
+        <a href="contact" class="btn btn-primary">Discuss OEM/ODM Project</a>
       </div>
     </div>
   </section>
@@ -481,31 +511,31 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <a href="index.html" class="logo"><div class="logo-icon">V</div><span>VAPEOVE</span></a>
+          <a href="./" class="logo"><div class="logo-icon">V</div><span>VAPEOVE</span></a>
           <p>Europe big puffs disposable vape wholesale. Germany, Poland, Spain local stock. 45K-70K puffs. 10 pcs/box MOQ.</p>
         </div>
         <div class="footer-links">
           <h4>Navigation</h4>
-          <a href="index.html">Home</a>
-          <a href="products.html">Products</a>
-          <a href="eu-warehouses.html">EU Warehouses</a>
-          <a href="oem.html">OEM/ODM</a>
-          <a href="about.html">About</a>
-          <a href="faq.html">FAQ</a>
+          <a href="./">Home</a>
+          <a href="products">Products</a>
+          <a href="eu-warehouses">EU Warehouses</a>
+          <a href="oem">OEM/ODM</a>
+          <a href="about">About</a>
+          <a href="faq">FAQ</a>
           <a href="blog/">Blog</a>
-          <a href="contact.html">Contact</a>
+          <a href="contact">Contact</a>
         </div>
         <div class="footer-links">
           <h4>Products</h4>
-          <a href="product-70k.html">HIFANCY SUPER 70K</a>
-          <a href="product-60k.html">HIFANCY 60K</a>
-          <a href="product-50k.html">HIFANCY 50K</a>
-          <a href="product-45k.html">HIFANCY 45K</a>
+          <a href="product-70k">HIFANCY SUPER 70K</a>
+          <a href="product-60k">HIFANCY 60K</a>
+          <a href="product-50k">HIFANCY 50K</a>
+          <a href="product-45k">HIFANCY 45K</a>
         </div>
         <div class="footer-links">
           <h4>Legal</h4>
-          <a href="privacy.html">Privacy Policy</a>
-          <a href="terms.html">Terms of Service</a>
+          <a href="privacy">Privacy Policy</a>
+          <a href="terms">Terms of Service</a>
         </div>
         <div class="footer-links">
           <h4>Contact</h4>
