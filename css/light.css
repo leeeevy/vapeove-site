@@ -1,0 +1,593 @@
+/* ============================================================
+   VAPEOVE — WHITE BUSINESS THEME  (light.css)
+   Load LAST (after style.css + cyberpunk.css).
+   Authority override that turns the dark neon theme into a
+   clean white B2B look, matching teesxvape.com style.
+   Design tokens are re-declared here as single source of truth.
+   ============================================================ */
+
+/* ---------- DESIGN TOKENS (white B2B) ---------- */
+:root {
+  /* Brand */
+  --brand-primary: #2563eb;        /* 商务蓝 */
+  --brand-primary-dark: #1d4ed8;
+  --brand-accent: #0ea5e9;
+
+  /* Surfaces */
+  --bg: #ffffff;                   /* 白底 */
+  --bg-panel: #f8fafc;             /* 浅灰面板 */
+  --bg-card: #ffffff;
+  --bg-card-hover: #f8fafc;
+  --bg-elevated: #ffffff;
+
+  /* Text */
+  --text: #0f172a;                 /* 深墨蓝正文 */
+  --text-muted: #64748b;
+  --text-dim: #94a3b8;
+  --text-primary: #0f172a;
+  --text-secondary: #64748b;
+
+  /* Borders & shadows (soft) */
+  --border: #e2e8f0;
+  --border-glow: rgba(37,99,235,0.15);
+  --radius: 8px;
+  --radius-lg: 14px;
+
+  /* Legacy names mapped to business colors (back-compat) */
+  --cyan: var(--brand-primary);
+  --cyan-deep: var(--brand-primary-dark);
+  --neon-cyan: var(--brand-primary);
+  --neon-yellow: #f59e0b;
+  --neon-magenta: var(--brand-accent);
+  --neon-purple: var(--brand-primary);
+  --pink: var(--brand-accent);
+  --pink-deep: #0284c7;
+  --purple: var(--brand-primary);
+  --purple-deep: var(--brand-primary-dark);
+  --green: #10b981;
+  --yellow: var(--neon-yellow);
+  --text-panel: var(--text);
+
+  /* Neutral glows (kill neon) */
+  --glow-yellow: none;
+  --glow-cyan: none;
+  --glow-magenta: none;
+  --scanline: none;
+}
+
+/* ---------- BASE SURFACE ---------- */
+body {
+  background: var(--bg) !important;
+  color: var(--text) !important;
+}
+
+/* Kill neon overlays: scanline, grid, noise */
+body::after,
+body::before,
+.noise-bg {
+  display: none !important;
+}
+
+/* Kill cyberpunk homepage-only dark surface + scanline */
+.cyberpunk-home {
+  background: var(--bg) !important;
+  color: var(--text) !important;
+  letter-spacing: normal !important;
+  font-family: var(--font-body) !important;
+}
+.cyberpunk-home::before {
+  display: none !important;
+}
+
+/* ---------- NAVIGATION (white) ---------- */
+.nav {
+  background: rgba(255,255,255,0.92) !important;
+  backdrop-filter: blur(12px) !important;
+  border-bottom: 1px solid var(--border) !important;
+  box-shadow: 0 1px 8px rgba(15,23,42,0.04) !important;
+}
+.logo span {
+  color: var(--brand-primary) !important;
+  text-shadow: none !important;
+  letter-spacing: .02em !important;
+  font-family: var(--font-head) !important;
+}
+.logo-icon {
+  background: var(--brand-primary) !important;
+  color: #ffffff !important;
+  box-shadow: none !important;
+}
+.nav-links a {
+  color: var(--text) !important;
+  letter-spacing: normal !important;
+  text-transform: none !important;
+  font-family: var(--font-body) !important;
+  font-size: .95rem !important;
+}
+.nav-links a:hover {
+  color: var(--brand-primary) !important;
+  text-shadow: none !important;
+}
+.nav-links a.active {
+  color: var(--brand-primary) !important;
+  text-shadow: none !important;
+}
+.nav-links a.active::after {
+  background: var(--brand-primary) !important;
+  box-shadow: none !important;
+}
+.lang-switcher select {
+  background: var(--bg) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--border) !important;
+  font-family: var(--font-body) !important;
+}
+
+/* ---------- HERO (white, left-text right-image) ---------- */
+.hero {
+  background: var(--bg) !important;
+  min-height: auto !important;
+  padding-top: 80px !important;
+  padding-bottom: 80px !important;
+}
+.hero::before,
+.hero::after,
+.hero .beam-sweep {
+  display: none !important;
+}
+.hero-inner {
+  grid-template-columns: 1.1fr 0.9fr !important;
+  gap: 48px !important;
+  align-items: center !important;
+}
+/* Remove dark panel behind left text — make it clean on white */
+.hero-content {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+.cyber-badge {
+  background: var(--bg-panel) !important;
+  color: var(--brand-primary) !important;
+  border: 1px solid var(--border) !important;
+  letter-spacing: .04em !important;
+}
+.glitch-title,
+.glitch-title::before,
+.glitch-title::after {
+  color: var(--text) !important;
+  text-shadow: none !important;
+  animation: none !important;
+}
+.cyber-subtitle {
+  color: var(--text) !important;
+}
+.cyber-desc {
+  color: var(--text-muted) !important;
+}
+.cyber-desc strong {
+  color: var(--brand-primary) !important;
+}
+.hud-stats {
+  background: transparent !important;
+  border: none !important;
+}
+.hud-stat {
+  background: var(--bg-panel) !important;
+  border: 1px solid var(--border) !important;
+  clip-path: none !important;
+  box-shadow: none !important;
+}
+.hud-stat .num {
+  color: var(--brand-primary) !important;
+  text-shadow: none !important;
+}
+.hud-stat .lbl {
+  color: var(--text-muted) !important;
+}
+/* Right-side product visual as a clean image card */
+.hero-visual {
+  background: var(--bg-panel) !important;
+  backdrop-filter: none !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: 0 8px 32px rgba(15,23,42,0.06) !important;
+  min-height: auto !important;
+}
+.hero-visual::before,
+.hero-visual::after {
+  display: none !important;
+}
+.hero-visual img.hero-product {
+  animation: none !important;
+  filter: none !important;
+  border-radius: var(--radius-lg) !important;
+}
+
+/* ---------- FEATURE BAR (white) ---------- */
+.feature-bar-section {
+  background: var(--bg-panel) !important;
+}
+.feature-bar {
+  background: transparent !important;
+}
+.feature-bar-item .fb-text {
+  color: var(--text) !important;
+}
+.feature-bar-item .fb-text strong {
+  color: var(--brand-primary) !important;
+}
+
+/* ---------- PROMO STRIP (white sticky-note banner) ---------- */
+.promo-strip {
+  background: var(--bg-panel) !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: none !important;
+}
+.promo-strip-gradient {
+  display: none !important;
+}
+
+/* ---------- SECTIONS ---------- */
+.section {
+  background: transparent !important;
+}
+.products-section {
+  background: var(--bg) !important;
+  border-top: 1px solid var(--border) !important;
+  border-bottom: 1px solid var(--border) !important;
+}
+.section-title p {
+  color: var(--text-muted) !important;
+}
+.section-title h2::after {
+  background: var(--brand-primary) !important;
+}
+.holo-section-header,
+.holo-section-title,
+.holo-section-badge {
+  display: none !important;
+}
+
+/* ---------- PRODUCT CARDS (white) ---------- */
+.products-grid,
+.product-grid {
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)) !important;
+}
+.product-card {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-lg) !important;
+  clip-path: none !important;
+  box-shadow: 0 1px 3px rgba(15,23,42,0.05) !important;
+  overflow: hidden !important;
+}
+/* Neutralize holographic gradient border + neon corner accents */
+.product-card::before {
+  background: none !important;
+  border: none !important;
+  mask: none !important;
+  -webkit-mask: none !important;
+  box-shadow: none !important;
+  display: none !important;
+}
+.product-card::after {
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  content: none !important;
+}
+/* Featured card: keep same size, subtle blue border */
+.product-card.featured {
+  grid-row: span 1 !important;
+  border-color: rgba(37,99,235,0.3) !important;
+  box-shadow: 0 1px 3px rgba(15,23,42,0.05), 0 0 0 1px rgba(37,99,235,0.15) !important;
+  inset: none !important;
+}
+.product-card:hover {
+  background: var(--bg-card-hover) !important;
+  border-color: rgba(37,99,235,0.35) !important;
+  box-shadow: 0 8px 24px rgba(37,99,235,0.08) !important;
+}
+/* Product image area: light gray */
+.product-image {
+  background: #f1f5f9 !important;
+  height: 220px !important;
+  padding: 24px 20px !important;
+}
+.product-image img {
+  filter: none !important;
+  box-shadow: none !important;
+}
+.product-image::after {
+  display: none !important;
+}
+.product-info h3 {
+  color: var(--text) !important;
+}
+.product-info p {
+  color: var(--text-muted) !important;
+}
+.pc-spec .spec-label {
+  color: var(--text-dim) !important;
+}
+.pc-spec .spec-value {
+  color: var(--brand-primary) !important;
+}
+.moq-highlight {
+  background: var(--bg-panel) !important;
+  color: var(--text-muted) !important;
+  border: 1px solid var(--border) !important;
+}
+.pc-price-contact {
+  color: var(--text) !important;
+  background: var(--bg-panel) !important;
+  border: 1px solid var(--border) !important;
+}
+.stock-badge {
+  background: var(--brand-primary) !important;
+  color: #fff !important;
+}
+
+/* ---------- WAREHOUSE / FEATURE / WHY CARDS (white) ---------- */
+.warehouse-card {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: 0 1px 3px rgba(15,23,42,0.05) !important;
+}
+.warehouse-card h3 {
+  color: var(--brand-primary) !important;
+}
+.warehouse-card .wh-location {
+  color: var(--text-muted) !important;
+}
+.warehouse-card li {
+  color: var(--text) !important;
+  border-bottom: 1px solid var(--border) !important;
+}
+.warehouse-card li strong {
+  color: var(--brand-primary) !important;
+}
+.shipping-logo {
+  background: var(--bg-panel) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--text) !important;
+}
+/* Why Choose Us — specificity match for cyberpunk.css */
+.why-choose-section .feature-card {
+  background: var(--bg-card) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: 0 1px 3px rgba(15,23,42,0.05) !important;
+}
+.why-choose-section .feature-card:hover {
+  border-color: rgba(37,99,235,0.35) !important;
+  box-shadow: 0 8px 24px rgba(37,99,235,0.08) !important;
+}
+.why-choose-section .feature-icon {
+  filter: none !important;
+  background: var(--bg-panel) !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: none !important;
+}
+.why-choose-section .feature-card h3 {
+  color: var(--text) !important;
+  text-transform: none !important;
+  letter-spacing: normal !important;
+}
+.feature-card {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: 0 1px 3px rgba(15,23,42,0.05) !important;
+}
+.feature-card h3 {
+  color: var(--text) !important;
+}
+.feature-card p {
+  color: var(--text-muted) !important;
+}
+.feature-card::before {
+  display: none !important;
+}
+.feature-icon {
+  background: var(--bg-panel) !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: none !important;
+}
+/* Neutralize the per-card neon icon colors */
+.feature-card:nth-child(1) .feature-icon,
+.feature-card:nth-child(2) .feature-icon,
+.feature-card:nth-child(3) .feature-icon,
+.feature-card:nth-child(4) .feature-icon {
+  background: var(--bg-panel) !important;
+  border-color: var(--border) !important;
+  box-shadow: none !important;
+}
+
+/* ---------- BUTTONS (business) ---------- */
+.btn-primary {
+  background: var(--brand-primary) !important;
+}
+.btn-primary::before,
+.btn-outline::before,
+.btn-pink::before {
+  display: none !important;
+}
+.btn-outline {
+  border-color: var(--border) !important;
+  color: var(--text) !important;
+  background: var(--bg) !important;
+}
+.btn-outline:hover {
+  border-color: var(--brand-primary) !important;
+  color: var(--brand-primary) !important;
+}
+
+/* ---------- REVIEW / CTA ---------- */
+.review-card {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border) !important;
+}
+.quote-cta {
+  background: var(--bg-panel) !important;
+  border: 1px solid var(--border) !important;
+}
+
+/* ---------- FOOTER (white) ---------- */
+.footer {
+  background: var(--bg-panel) !important;
+  border-top: 1px solid var(--border) !important;
+  color: var(--text) !important;
+}
+.footer a {
+  color: var(--text-muted) !important;
+}
+.footer a:hover {
+  color: var(--brand-primary) !important;
+}
+.footer h4 {
+  color: var(--text) !important;
+}
+.footer .age-warning {
+  background: var(--bg) !important;
+  color: var(--text-dim) !important;
+  border: 1px solid var(--border) !important;
+}
+
+/* ---------- BREADCRUMB (white) ---------- */
+.breadcrumb {
+  color: var(--text-muted) !important;
+  background: var(--bg) !important;
+}
+.breadcrumb a {
+  color: var(--brand-primary) !important;
+}
+.breadcrumb a:hover {
+  color: var(--brand-primary-dark) !important;
+}
+.breadcrumb span {
+  color: var(--text-muted) !important;
+}
+
+/* ---------- MOBILE MENU (white) ---------- */
+.mobile-menu {
+  background: var(--bg) !important;
+  border-right: 1px solid var(--border) !important;
+}
+.mobile-menu a {
+  color: var(--text) !important;
+}
+.mobile-menu a.active {
+  color: var(--brand-primary) !important;
+}
+
+/* ---------- FLOATING BUTTONS (white) ---------- */
+.wa-float-btn {
+  box-shadow: 0 4px 16px rgba(15,23,42,0.12) !important;
+}
+
+/* ---------- NEW ARRIVAL SECTION (CLEAR 8000) ---------- */
+.new-arrival-section {
+  padding: 90px 0 !important;
+  background: #f8fafc !important;
+  border-top: 1px solid var(--border) !important;
+  border-bottom: 1px solid var(--border) !important;
+}
+.new-arrival-card {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 40px !important;
+  align-items: center !important;
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: 0 8px 32px rgba(15,23,42,0.06) !important;
+  border-radius: var(--radius-lg) !important;
+  overflow: hidden !important;
+}
+.new-arrival-visual {
+  position: relative !important;
+  background: #f1f5f9 !important;
+  padding: 24px !important;
+}
+.new-arrival-visual img {
+  width: 100% !important;
+  height: auto !important;
+  object-fit: contain !important;
+  border-radius: var(--radius-lg) !important;
+}
+.new-arrival-badge {
+  position: absolute !important;
+  top: 20px !important;
+  left: 20px !important;
+  z-index: 2 !important;
+  background: var(--brand-primary) !important;
+  color: #fff !important;
+  padding: 6px 14px !important;
+  border-radius: 999px !important;
+  font-size: .75rem !important;
+  font-weight: 700 !important;
+  letter-spacing: .06em !important;
+}
+.new-arrival-info {
+  padding: 40px 40px 40px 0 !important;
+}
+.new-arrival-info h2 {
+  color: var(--text) !important;
+  margin-bottom: 12px !important;
+}
+.new-arrival-info p {
+  color: var(--text-muted) !important;
+  font-size: 1rem !important;
+  margin-bottom: 24px !important;
+}
+.new-arrival-specs {
+  display: grid !important;
+  grid-template-columns: repeat(5, 1fr) !important;
+  gap: 12px !important;
+  margin-bottom: 28px !important;
+}
+.new-arrival-specs .na-spec {
+  background: var(--bg-panel) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 10px !important;
+  padding: 10px 8px !important;
+  text-align: center !important;
+}
+.new-arrival-specs .na-spec .na-label {
+  display: block !important;
+  font-size: .68rem !important;
+  letter-spacing: .05em !important;
+  color: var(--text-dim) !important;
+  margin-bottom: 4px !important;
+}
+.new-arrival-specs .na-spec .na-value {
+  display: block !important;
+  font-size: 1.05rem !important;
+  font-weight: 700 !important;
+  color: var(--text) !important;
+}
+.new-arrival-cta {
+  display: flex !important;
+  gap: 12px !important;
+  flex-wrap: wrap !important;
+}
+
+@media (max-width: 768px) {
+  .new-arrival-card {
+    grid-template-columns: 1fr !important;
+  }
+  .new-arrival-info {
+    padding: 24px !important;
+  }
+  .new-arrival-specs {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .hero-inner {
+    grid-template-columns: 1fr !important;
+  }
+}
