@@ -1,6 +1,5 @@
 # Redirect www to non-www
 https://www.vapeove.com/* https://vapeove.com/:splat 301!
-
 # === Full-site clean URL redirects (.html -> clean, 301) ===
 /404.html /404 301!
 /about.html /about 301!
@@ -347,7 +346,6 @@ https://www.vapeove.com/* https://vapeove.com/:splat 301!
 /vape-shops-wroclaw-wholesale-supplier.html /vape-shops-wroclaw-wholesale-supplier 301!
 /vape-wholesale-10-pieces.html /vape-wholesale-10-pieces 301!
 /vape-wholesale-poland-local-stock.html /vape-wholesale-poland-local-stock 301!
-
 # === Internal rewrites (clean -> .html file, 200) ===
 /404 /404.html 200
 /about /about.html 200
@@ -693,7 +691,6 @@ https://www.vapeove.com/* https://vapeove.com/:splat 301!
 /vape-shops-wroclaw-wholesale-supplier /vape-shops-wroclaw-wholesale-supplier.html 200
 /vape-wholesale-10-pieces /vape-wholesale-10-pieces.html 200
 /vape-wholesale-poland-local-stock /vape-wholesale-poland-local-stock.html 200
-
 # Security headers
 /*
   X-Frame-Options: DENY
@@ -701,3 +698,68 @@ https://www.vapeove.com/* https://vapeove.com/:splat 301!
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
 
+# QMI third-party brand product pages (EN + DE/ES/PL)
+/vozol-rave-40000.html /vozol-rave-40000 301!
+/vozol-rave-40000 /vozol-rave-40000.html 200
+/alfakher-crownbar-15k.html /alfakher-crownbar-15k 301!
+/alfakher-crownbar-15k /alfakher-crownbar-15k.html 200
+/elfbar-ice-king-30000.html /elfbar-ice-king-30000 301!
+/elfbar-ice-king-30000 /elfbar-ice-king-30000.html 200
+/geekbar-pulsex-25000.html /geekbar-pulsex-25000 301!
+/geekbar-pulsex-25000 /geekbar-pulsex-25000.html 200
+/hayati-pro-ultra-plus.html /hayati-pro-ultra-plus 301!
+/hayati-pro-ultra-plus /hayati-pro-ultra-plus.html 200
+/waka-volo-30000.html /waka-volo-30000 301!
+/waka-volo-30000 /waka-volo-30000.html 200
+/iget-bar-pro.html /iget-bar-pro 301!
+/iget-bar-pro /iget-bar-pro.html 200
+/smok-xpriv-solo.html /smok-xpriv-solo 301!
+/smok-xpriv-solo /smok-xpriv-solo.html 200
+/de/vozol-rave-40000.html /de/vozol-rave-40000 301!
+/de/vozol-rave-40000 /de/vozol-rave-40000.html 200
+/de/alfakher-crownbar-15k.html /de/alfakher-crownbar-15k 301!
+/de/alfakher-crownbar-15k /de/alfakher-crownbar-15k.html 200
+/de/elfbar-ice-king-30000.html /de/elfbar-ice-king-30000 301!
+/de/elfbar-ice-king-30000 /de/elfbar-ice-king-30000.html 200
+/de/geekbar-pulsex-25000.html /de/geekbar-pulsex-25000 301!
+/de/geekbar-pulsex-25000 /de/geekbar-pulsex-25000.html 200
+/de/hayati-pro-ultra-plus.html /de/hayati-pro-ultra-plus 301!
+/de/hayati-pro-ultra-plus /de/hayati-pro-ultra-plus.html 200
+/de/waka-volo-30000.html /de/waka-volo-30000 301!
+/de/waka-volo-30000 /de/waka-volo-30000.html 200
+/de/iget-bar-pro.html /de/iget-bar-pro 301!
+/de/iget-bar-pro /de/iget-bar-pro.html 200
+/de/smok-xpriv-solo.html /de/smok-xpriv-solo 301!
+/de/smok-xpriv-solo /de/smok-xpriv-solo.html 200
+/es/vozol-rave-40000.html /es/vozol-rave-40000 301!
+/es/vozol-rave-40000 /es/vozol-rave-40000.html 200
+/es/alfakher-crownbar-15k.html /es/alfakher-crownbar-15k 301!
+/es/alfakher-crownbar-15k /es/alfakher-crownbar-15k.html 200
+/es/elfbar-ice-king-30000.html /es/elfbar-ice-king-30000 301!
+/es/elfbar-ice-king-30000 /es/elfbar-ice-king-30000.html 200
+/es/geekbar-pulsex-25000.html /es/geekbar-pulsex-25000 301!
+/es/geekbar-pulsex-25000 /es/geekbar-pulsex-25000.html 200
+/es/hayati-pro-ultra-plus.html /es/hayati-pro-ultra-plus 301!
+/es/hayati-pro-ultra-plus /es/hayati-pro-ultra-plus.html 200
+/es/waka-volo-30000.html /es/waka-volo-30000 301!
+/es/waka-volo-30000 /es/waka-volo-30000.html 200
+/es/iget-bar-pro.html /es/iget-bar-pro 301!
+/es/iget-bar-pro /es/iget-bar-pro.html 200
+/es/smok-xpriv-solo.html /es/smok-xpriv-solo 301!
+/es/smok-xpriv-solo /es/smok-xpriv-solo.html 200
+/pl/vozol-rave-40000.html /pl/vozol-rave-40000 301!
+/pl/vozol-rave-40000 /pl/vozol-rave-40000.html 200
+/pl/alfakher-crownbar-15k.html /pl/alfakher-crownbar-15k 301!
+/pl/alfakher-crownbar-15k /pl/alfakher-crownbar-15k.html 200
+/pl/elfbar-ice-king-30000.html /pl/elfbar-ice-king-30000 301!
+/pl/elfbar-ice-king-30000 /pl/elfbar-ice-king-30000.html 200
+/pl/geekbar-pulsex-25000.html /pl/geekbar-pulsex-25000 301!
+/pl/geekbar-pulsex-25000 /pl/geekbar-pulsex-25000.html 200
+/pl/hayati-pro-ultra-plus.html /pl/hayati-pro-ultra-plus 301!
+/pl/hayati-pro-ultra-plus /pl/hayati-pro-ultra-plus.html 200
+/pl/waka-volo-30000.html /pl/waka-volo-30000 301!
+/pl/waka-volo-30000 /pl/waka-volo-30000.html 200
+/pl/iget-bar-pro.html /pl/iget-bar-pro 301!
+/pl/iget-bar-pro /pl/iget-bar-pro.html 200
+/pl/smok-xpriv-solo.html /pl/smok-xpriv-solo 301!
+/pl/smok-xpriv-solo /pl/smok-xpriv-solo.html 200

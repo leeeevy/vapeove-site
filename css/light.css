@@ -15,6 +15,7 @@
 
   /* Surfaces */
   --bg: #ffffff;                   /* 白底 */
+  --bg-primary: #ffffff;           /* was #0A0A0A (cyberpunk) — force white */
   --bg-panel: #f8fafc;             /* 浅灰面板 */
   --bg-card: #ffffff;
   --bg-card-hover: #f8fafc;
@@ -153,15 +154,37 @@ body::before,
   border: 1px solid var(--border) !important;
   letter-spacing: .04em !important;
 }
-.glitch-title,
-.glitch-title::before,
-.glitch-title::after {
+/* Hero headings must beat style.css `.hero-content .glitch-title` (0,2,0 + !important)
+   and kill the white neon fill/text-shadow so text is legible on white bg. */
+.hero-content .glitch-title,
+.hero-content .glitch-title::before,
+.hero-content .glitch-title::after,
+.hero .glitch-title::before,
+.hero .glitch-title::after,
+.page-header h1 {
   color: var(--text) !important;
+  -webkit-text-fill-color: var(--text) !important;
+  -webkit-background-clip: initial !important;
+  background-clip: initial !important;
+  background: none !important;
   text-shadow: none !important;
   animation: none !important;
 }
-.cyber-subtitle {
+/* Neutralize cyberpunk glitch pseudo-element ghosts (cyan/magenta) across all
+   .glitch-title contexts (hero + page-header), incl. products.html PRODUCT CATALOG. */
+.glitch-title::before,
+.glitch-title::after {
+  display: none !important;
+  color: transparent !important;
+  text-shadow: none !important;
+  animation: none !important;
+  content: none !important;
+}
+.hero-content .cyber-subtitle,
+.hero .cyber-subtitle {
   color: var(--text) !important;
+  -webkit-text-fill-color: var(--text) !important;
+  text-shadow: none !important;
 }
 .cyber-desc {
   color: var(--text-muted) !important;
@@ -313,6 +336,67 @@ body::before,
 }
 .pc-spec .spec-value {
   color: var(--brand-primary) !important;
+}
+/* Align spec columns so PUFFS / BATTERY / COIL line up across every card */
+.pc-specs {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 8px !important;
+  margin-bottom: 14px !important;
+}
+.pc-spec {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  min-height: 46px !important;
+  text-align: center !important;
+}
+.pc-spec .spec-value {
+  font-weight: 700 !important;
+  font-size: .82rem !important;
+  margin-top: 4px !important;
+  white-space: nowrap !important;
+}
+/* Push CTA button to card bottom so VIEW DETAILS aligns across all cards */
+.product-info {
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+}
+.product-info .product-link,
+.product-info .pc-btn,
+.pc-price-wrap + .product-link {
+  margin-top: auto !important;
+}
+.pc-price-wrap {
+  margin-bottom: 14px !important;
+}
+.product-link {
+  text-align: center !important;
+  box-sizing: border-box !important;
+  display: inline-flex !important;
+  justify-content: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  align-self: center !important;
+  /* White-business style: drop cyberpunk clip-path corner cut + neon border/glow */
+  clip-path: none !important;
+  border: 1px solid var(--brand-primary) !important;
+  border-radius: var(--radius) !important;
+  background: transparent !important;
+  color: var(--brand-primary) !important;
+  text-shadow: none !important;
+  box-shadow: none !important;
+  padding: 10px 24px !important;
+}
+.product-link:hover {
+  background: var(--brand-primary) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 14px rgba(37,99,235,0.2) !important;
+  transform: none !important;
+  text-shadow: none !important;
+  gap: 10px !important;
 }
 .moq-highlight {
   background: var(--bg-panel) !important;
