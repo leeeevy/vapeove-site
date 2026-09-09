@@ -1258,14 +1258,14 @@ body { position: relative; }
 /* === Floating WhatsApp / Telegram Buttons === */
 .wa-float-wrap {
   position: fixed; bottom: 24px; right: 24px; z-index: 9999;
-  display: flex; flex-direction: column; gap: 12px;
+  display: flex; flex-direction: column; gap: 14px;
 }
 .wa-float-btn {
-  display: flex; align-items: center; gap: 8px;
-  padding: 12px 20px; border-radius: 50px; font-family: var(--font-head);
-  font-weight: 700; font-size: 0.85rem; text-decoration: none;
+  display: flex; align-items: center; gap: 10px;
+  padding: 15px 26px; border-radius: 50px; font-family: var(--font-head);
+  font-weight: 700; font-size: 1rem; text-decoration: none;
   transition: var(--transition); box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-  white-space: nowrap;
+  white-space: nowrap; letter-spacing: .02em;
 }
 .wa-float-btn.wa {
   background: linear-gradient(135deg, #25D366, #128C7E); color: #fff;
@@ -1274,7 +1274,7 @@ body { position: relative; }
   background: linear-gradient(135deg, #0088cc, #229ED9); color: #fff;
 }
 .wa-float-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(0,229,255,0.3); }
-.wa-float-btn svg { width: 22px; height: 22px; flex-shrink: 0; }
+.wa-float-btn svg { width: 26px; height: 26px; flex-shrink: 0; }
 
 /* === Warehouse Cards === */
 .warehouse-grid {

@@ -307,6 +307,23 @@ body::before,
   color: var(--text-muted);
   font-size: .76rem;
 }
+/* Clickable product link wrapping the whole slide image */
+.hc-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  outline: none;
+}
+.hc-link img.hero-product {
+  transition: transform .35s ease, filter .35s ease;
+}
+.hc-slide.active .hc-link:hover img.hero-product {
+  transform: scale(1.03);
+  filter: brightness(1.02);
+}
 /* Carousel dots */
 .hc-dots {
   position: absolute;
@@ -728,6 +745,17 @@ body::before,
 .wa-float-btn {
   box-shadow: 0 4px 16px rgba(15,23,42,0.12) !important;
 }
+/* Attract attention: subtle pulsing halo on the WhatsApp button */
+@keyframes waPulse {
+  0%, 100% { box-shadow: 0 4px 16px rgba(15,23,42,.12), 0 0 0 0 rgba(37,211,102,.45); }
+  50%      { box-shadow: 0 4px 16px rgba(15,23,42,.12), 0 0 0 12px rgba(37,211,102,0); }
+}
+@keyframes waPulseTg {
+  0%, 100% { box-shadow: 0 4px 16px rgba(15,23,42,.12), 0 0 0 0 rgba(0,136,204,.45); }
+  50%      { box-shadow: 0 4px 16px rgba(15,23,42,.12), 0 0 0 12px rgba(0,136,204,0); }
+}
+.wa-float-btn.wa { animation: waPulse 2.2s ease-in-out infinite; }
+.wa-float-btn.tg { animation: waPulseTg 2.2s ease-in-out infinite 1.1s; }
 
 /* ---------- NEW ARRIVAL SECTION (CLEAR 8000) ---------- */
 .new-arrival-section {
