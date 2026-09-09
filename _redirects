@@ -691,12 +691,6 @@ https://www.vapeove.com/* https://vapeove.com/:splat 301!
 /vape-shops-wroclaw-wholesale-supplier /vape-shops-wroclaw-wholesale-supplier.html 200
 /vape-wholesale-10-pieces /vape-wholesale-10-pieces.html 200
 /vape-wholesale-poland-local-stock /vape-wholesale-poland-local-stock.html 200
-# Security headers
-/*
-  X-Frame-Options: DENY
-  X-Content-Type-Options: nosniff
-  Referrer-Policy: strict-origin-when-cross-origin
-  Permissions-Policy: camera=(), microphone=(), geolocation=()
 
 # QMI third-party brand product pages (EN + DE/ES/PL)
 /vozol-rave-40000.html /vozol-rave-40000 301!
