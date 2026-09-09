@@ -186,11 +186,30 @@ body::before,
   -webkit-text-fill-color: var(--text) !important;
   text-shadow: none !important;
 }
-.cyber-desc {
+/* Hero description (45K|50K|... shipped from...): replace pixel/mono neon
+   highlight with clean readable business text. Match specificity of style.css
+   `.hero-content .cyber-desc` (0,2,1) + lose the pixel font + blue accents. */
+.hero-content .cyber-desc {
   color: var(--text-muted) !important;
+  font-family: var(--font-body) !important;
+  font-size: 1.12rem !important;
+  font-weight: 400 !important;
+  line-height: 1.75 !important;
+  letter-spacing: normal !important;
+  text-transform: none !important;
+  text-shadow: none !important;
 }
-.cyber-desc strong {
-  color: var(--brand-primary) !important;
+.hero-content .cyber-desc strong {
+  color: var(--text) !important;
+  font-family: var(--font-body) !important;
+  font-weight: 700 !important;
+  line-height: inherit !important;
+  letter-spacing: normal !important;
+  text-transform: none !important;
+  text-shadow: none !important;
+}
+.hero-content .cyber-desc strong[style*="#39FF14"] {
+  color: var(--text) !important;
 }
 .hud-stats {
   background: transparent !important;
@@ -225,6 +244,128 @@ body::before,
   animation: none !important;
   filter: none !important;
   border-radius: var(--radius-lg) !important;
+}
+
+/* ---------- HERO BRAND CAROUSEL (white) ---------- */
+.hero-carousel {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+}
+.hc-track {
+  position: relative;
+  width: 100%;
+  min-height: 420px;
+}
+.hc-slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(.97);
+  transition: opacity .6s ease, transform .6s ease;
+  pointer-events: none;
+}
+.hc-slide.active {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+.hc-slide img.hero-product {
+  max-height: 420px;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+/* Caption chip under the product image */
+.hc-caption {
+  position: absolute;
+  left: 50%;
+  bottom: 48px;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 6px 14px;
+  box-shadow: 0 4px 14px rgba(15,23,42,.08);
+  z-index: 6;
+}
+.hc-caption .hc-brand {
+  color: var(--brand-primary);
+  font-weight: 700;
+  font-size: .78rem;
+  letter-spacing: .04em;
+}
+.hc-caption .hc-name {
+  color: var(--text-muted);
+  font-size: .76rem;
+}
+/* Carousel dots */
+.hc-dots {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 6px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  z-index: 5;
+}
+.hc-dots .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--border);
+  cursor: pointer;
+  transition: all .3s ease;
+}
+.hc-dots .dot.active {
+  background: var(--brand-primary);
+  width: 20px;
+  border-radius: 999px;
+}
+/* Carousel arrows */
+.hc-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--text);
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 4;
+  box-shadow: 0 4px 14px rgba(15,23,42,.08);
+  transition: all .3s ease;
+}
+.hc-arrow:hover {
+  background: var(--brand-primary);
+  color: #fff;
+  border-color: var(--brand-primary);
+}
+.hc-prev { left: 8px; }
+.hc-next { right: 8px; }
+@media (max-width: 768px) {
+  .hc-track { min-height: 320px; }
+  .hc-slide img.hero-product { max-height: 320px; }
+  .hc-arrow { width: 34px; height: 34px; font-size: 1.15rem; }
+  .hc-caption { bottom: 36px; padding: 4px 10px; }
+  .hc-caption .hc-name { display: none; }
+  .hc-dots { bottom: 10px; }
 }
 
 /* ---------- FEATURE BAR (white) ---------- */
@@ -273,7 +414,12 @@ body::before,
 }
 
 /* ---------- PRODUCT CARDS (white) ---------- */
-.products-grid,
+/* products-grid (plural) = homepage BIG PUFFS line (5 cards) → one clean row */
+.products-grid {
+  grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+  gap: 18px !important;
+}
+/* product-grid (singular) = products catalog page → responsive auto-fill */
 .product-grid {
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)) !important;
 }
@@ -341,7 +487,7 @@ body::before,
 .pc-specs {
   display: grid !important;
   grid-template-columns: repeat(3, 1fr) !important;
-  gap: 8px !important;
+  gap: 6px !important;
   margin-bottom: 14px !important;
 }
 .pc-spec {
@@ -349,14 +495,26 @@ body::before,
   flex-direction: column !important;
   align-items: center !important;
   justify-content: flex-start !important;
-  min-height: 46px !important;
+  min-height: 44px !important;
   text-align: center !important;
+}
+/* Label: tiny, single-line, fixed height — never wraps so value stays put */
+.pc-spec .spec-label {
+  white-space: nowrap !important;
+  display: block !important;
+  font-size: .58rem !important;
+  line-height: 1 !important;
+  height: 12px !important;
+  letter-spacing: .04em !important;
 }
 .pc-spec .spec-value {
   font-weight: 700 !important;
-  font-size: .82rem !important;
-  margin-top: 4px !important;
+  font-size: .78rem !important;
+  margin-top: 6px !important;
   white-space: nowrap !important;
+  display: block !important;
+  line-height: 1 !important;
+  min-height: 14px !important;
 }
 /* Push CTA button to card bottom so VIEW DETAILS aligns across all cards */
 .product-info {
@@ -672,6 +830,23 @@ body::before,
 
 @media (max-width: 768px) {
   .hero-inner {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Homepage BIG PUFFS line: 5 cards → responsive fallback so they don't overflow */
+@media (max-width: 1200px) {
+  .products-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+}
+@media (max-width: 900px) {
+  .products-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+@media (max-width: 560px) {
+  .products-grid {
     grid-template-columns: 1fr !important;
   }
 }

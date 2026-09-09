@@ -603,4 +603,50 @@ document.addEventListener('DOMContentLoaded', function() {
         encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
     }
   }
+
+  // ===========================================
+  // HERO BRAND CAROUSEL — auto-rotating featured brands
+  // ===========================================
+  const heroCarousel = document.getElementById('heroCarousel');
+  if (heroCarousel) {
+    const slides = heroCarousel.querySelectorAll('.hc-slide');
+    const dotsWrap = heroCarousel.querySelector('.hc-dots');
+    const prevBtn = heroCarousel.querySelector('.hc-prev');
+    const nextBtn = heroCarousel.querySelector('.hc-next');
+    let current = 0;
+    let heroTimer = null;
+    const HERO_INTERVAL = 5000;
+
+    // Build dots
+    slides.forEach(function (_, i) {
+      const dot = document.createElement('span');
+      dot.className = 'dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('role', 'tab');
+      dot.addEventListener('click', function () { goHero(i); });
+      dotsWrap.appendChild(dot);
+    });
+    const dots = dotsWrap.querySelectorAll('.dot');
+
+    function goHero(idx) {
+      if (idx < 0) idx = slides.length - 1;
+      if (idx >= slides.length) idx = 0;
+      current = idx;
+      slides.forEach(function (s, i) { s.classList.toggle('active', i === idx); });
+      dots.forEach(function (d, i) { d.classList.toggle('active', i === idx); });
+      resetHero();
+    }
+    function nextHero() { goHero(current + 1); }
+    function prevHero() { goHero(current - 1); }
+    function startHero() { stopHero(); heroTimer = setInterval(nextHero, HERO_INTERVAL); }
+    function stopHero() { if (heroTimer) clearInterval(heroTimer); }
+    function resetHero() { stopHero(); startHero(); }
+
+    if (prevBtn) prevBtn.addEventListener('click', function (e) { e.stopPropagation(); prevHero(); });
+    if (nextBtn) nextBtn.addEventListener('click', function (e) { e.stopPropagation(); nextHero(); });
+    heroCarousel.addEventListener('mouseenter', stopHero);
+    heroCarousel.addEventListener('mouseleave', startHero);
+
+    // Start auto-rotate
+    startHero();
+  }
 });
