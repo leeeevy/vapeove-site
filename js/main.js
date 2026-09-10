@@ -253,16 +253,15 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // --- 5) outbound_click: WhatsApp / Telegram / mailto links (high-intent contact) ---
+  // --- 5) outbound_click: WhatsApp / mailto links (high-intent contact) ---
   document.addEventListener('click', function (e) {
     var a = e.target.closest ? e.target.closest('a[href]') : null;
     if (!a) return;
     var href = a.getAttribute('href') || '';
     var isWhatsApp = /wa\.me|whatsapp/i.test(href);
-    var isTelegram = /t\.me|telegram/i.test(href);
     var isEmail = /^mailto:/i.test(href);
-    if (isWhatsApp || isTelegram || isEmail) {
-      var channel = isWhatsApp ? 'whatsapp' : (isTelegram ? 'telegram' : 'email');
+    if (isWhatsApp || isEmail) {
+      var channel = isWhatsApp ? 'whatsapp' : 'email';
       track('event', 'outbound_click', {
         currency: currency,
         link_channel: channel,
@@ -585,7 +584,7 @@ document.addEventListener('DOMContentLoaded', function() {
         '<div style="text-align:center;padding:30px 10px;">' +
         '<div style="font-size:2.4rem;margin-bottom:12px;">✅</div>' +
         '<p style="font-size:1.05rem;color:var(--text);">' + msg + '</p>' +
-        '<p style="margin-top:14px;color:var(--text-muted);">WhatsApp: <a href="https://wa.me/8618902484114" target="_blank" style="color:var(--cyan);">+86 189 0248 4114</a> · Telegram: <a href="https://t.me/vapeove" target="_blank" style="color:var(--cyan);">@vapeove</a></p>' +
+        '<p style="margin-top:14px;color:var(--text-muted);">WhatsApp: <a href="https://wa.me/8618002544151" target="_blank" style="color:var(--cyan);">+86 180 0254 4151</a></p>' +
         '</div>';
     }
 
@@ -599,7 +598,7 @@ document.addEventListener('DOMContentLoaded', function() {
       });
       const subject = 'Wholesale Inquiry - ' + (d.get('name') || '');
       showInquirySuccess(form);
-      window.location.href = 'mailto:451802229@qq.com?subject=' +
+      window.location.href = 'mailto:qjlw19970817@gmail.com?subject=' +
         encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
     }
   }
