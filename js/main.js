@@ -638,7 +638,7 @@ document.addEventListener('DOMContentLoaded', function() {
         '<div style="text-align:center;padding:30px 10px;">' +
         '<div style="font-size:2.4rem;margin-bottom:12px;">✅</div>' +
         '<p style="font-size:1.05rem;color:var(--text);">' + msg + '</p>' +
-        '<p style="margin-top:14px;color:var(--text-muted);">WhatsApp: <a href="https://wa.me/8618002544151" target="_blank" style="color:var(--cyan);">+86 180 0254 4151</a></p>' +
+        '<p style="margin-top:14px;color:var(--text-muted);">WhatsApp: <a href="https://web.whatsapp.com/send?phone=8618002544151" target="_blank" style="color:var(--cyan);">+86 180 0254 4151</a></p>' +
         '</div>';
     }
 
@@ -703,3 +703,43 @@ document.addEventListener('DOMContentLoaded', function() {
     startHero();
   }
 });
+
+// ===========================================
+// WHATSAPP LINK — MOBILE FALLBACK
+// Markup ships with the web.whatsapp.com form, which is what desktop needs: it goes
+// straight into WhatsApp Web instead of showing wa.me's "download the app" interstitial.
+// On phones that form is worse — it makes the user sign in to WhatsApp Web instead of
+// opening the app they already have. So on mobile we rewrite it back to wa.me, which
+// hands off to the native app directly.
+// ===========================================
+(function () {
+  var WEB_PREFIX = 'https://web.whatsapp.com/send?phone=';
+  var ME_PREFIX = 'https://wa.me/';
+
+  var ua = navigator.userAgent || '';
+  var isMobile = /Android|iPhone|iPad|iPod|Windows Phone|webOS|BlackBerry|Opera Mini|IEMobile/i.test(ua)
+    // iPadOS 13+ reports itself as "Macintosh", so fall back to touch capability.
+    || (navigator.maxTouchPoints > 1 && /Macintosh/i.test(ua));
+
+  if (!isMobile) return;
+
+  function rewrite() {
+    var links = document.querySelectorAll('a[href^="' + WEB_PREFIX + '"]');
+    for (var i = 0; i < links.length; i++) {
+      var a = links[i];
+      // web.whatsapp.com/send?phone=8618002544151&text=Hi  →  wa.me/8618002544151?text=Hi
+      var rest = a.getAttribute('href').slice(WEB_PREFIX.length);
+      var q = rest.indexOf('&');
+      var phone = q === -1 ? rest : rest.slice(0, q);
+      var text = q === -1 ? '' : rest.slice(q + 1); // already starts with "text="
+      a.setAttribute('href', ME_PREFIX + phone + (text ? '?' + text : ''));
+      // WhatsApp handles its own new-tab behaviour; keep the markup's target intact.
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', rewrite);
+  } else {
+    rewrite();
+  }
+})();
