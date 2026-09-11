@@ -5,6 +5,10 @@
 // AGE VERIFICATION GATE (site-wide, single place)
 // Injected here so it runs immediately (before DOMContentLoaded) to avoid flash.
 // Store consent in localStorage so returning visitors skip it.
+//
+// Threshold: 18+. This site's market is the EU (DE / PL / ES), where the legal
+// purchase age for vaping products is 18. The US "Tobacco 21" rule does not
+// apply here — vapeove.com does not sell into the US.
 // ===========================================
 (function () {
   var storage = null;
@@ -12,7 +16,55 @@
   var KEY = 'vapeove-age-verified';
   var THIRTY_DAYS = 30 * 24 * 60 * 60 * 1000;
 
-  // If the visitor was redirected here as "under 21", force re-show and clear consent.
+  // Path-based language detection — mirrors the pageLang helper used by the GA4 block.
+  // Matches the path SEGMENT only: a root file like /ploox-hookah.html must stay EN,
+  // so a bare startsWith('/pl') would be wrong.
+  var LANG = (function () {
+    var m = /^\/(de|pl|es)(?:\/|$)/.exec(window.location.pathname);
+    return m ? m[1] : 'en';
+  })();
+
+  var T = {
+    en: {
+      age: '18+',
+      title: 'Are you 18 or older?',
+      sub: 'This website sells vaping products intended for adults only. You must be at least 18 years old to enter.',
+      accept: 'I am 18 or older — Enter',
+      deny: 'I am under 18 — Leave',
+      foot: 'Nicotine is an addictive substance. This product is for adults only.',
+      blocked: 'You must be 18 or older to access this site.'
+    },
+    de: {
+      age: '18+',
+      title: 'Sind Sie 18 Jahre oder älter?',
+      sub: 'Diese Website verkauft Produkte zum Dampfen, die ausschließlich für Erwachsene bestimmt sind. Sie müssen mindestens 18 Jahre alt sein, um fortzufahren.',
+      accept: 'Ich bin 18 Jahre oder älter — Eintreten',
+      deny: 'Ich bin unter 18 — Verlassen',
+      foot: 'Nikotin ist eine süchtig machende Substanz. Dieses Produkt ist nur für Erwachsene bestimmt.',
+      blocked: 'Sie müssen mindestens 18 Jahre alt sein, um auf diese Website zuzugreifen.'
+    },
+    pl: {
+      age: '18+',
+      title: 'Czy masz ukończone 18 lat?',
+      sub: 'Ta strona sprzedaje produkty do wapowania przeznaczone wyłącznie dla osób dorosłych. Aby wejść, musisz mieć ukończone 18 lat.',
+      accept: 'Mam ukończone 18 lat — Wejdź',
+      deny: 'Nie mam 18 lat — Wyjdź',
+      foot: 'Nikotyna jest substancją uzależniającą. Ten produkt jest przeznaczony wyłącznie dla osób dorosłych.',
+      blocked: 'Dostęp do tej strony mają wyłącznie osoby, które ukończyły 18 lat.'
+    },
+    es: {
+      age: '18+',
+      title: '¿Tienes 18 años o más?',
+      sub: 'Este sitio web vende productos de vapeo destinados únicamente a adultos. Debes tener al menos 18 años para entrar.',
+      accept: 'Tengo 18 años o más — Entrar',
+      deny: 'Tengo menos de 18 — Salir',
+      foot: 'La nicotina es una sustancia adictiva. Este producto es solo para adultos.',
+      blocked: 'Debes tener al menos 18 años para acceder a este sitio web.'
+    }
+  };
+  var t = T[LANG] || T.en;
+
+  // If the visitor was redirected here as "under 18", force re-show and clear consent.
   var params = new URLSearchParams(window.location.search || '');
   var deniedNow = params.get('agegate') === 'denied';
   if (deniedNow && storage) {
@@ -34,22 +86,24 @@
     ov.setAttribute('role', 'dialog');
     ov.setAttribute('aria-modal', 'true');
     ov.setAttribute('aria-labelledby', 'age-gate-title');
+    ov.setAttribute('lang', LANG);
     ov.innerHTML =
       '<div class="age-gate-modal" role="document">' +
-      '  <div class="age-gate-icon"><span class="age-gate-age">21+</span></div>' +
-      '  <h2 id="age-gate-title">Are you 21 or older?</h2>' +
-      '  <p class="age-gate-sub">This website sells vaping products intended for adults only. You must be at least 21 years old to enter.</p>' +
+      '  <div class="age-gate-icon"><span class="age-gate-age">' + t.age + '</span></div>' +
+      '  <h2 id="age-gate-title">' + t.title + '</h2>' +
+      '  <p class="age-gate-sub">' + t.sub + '</p>' +
       '  <div class="age-gate-actions">' +
-      '    <button type="button" class="age-gate-btn accept" id="age-gate-accept">I am 21 or older — Enter</button>' +
-      '    <button type="button" class="age-gate-btn deny" id="age-gate-deny">I am under 21 — Leave</button>' +
+      '    <button type="button" class="age-gate-btn accept" id="age-gate-accept">' + t.accept + '</button>' +
+      '    <button type="button" class="age-gate-btn deny" id="age-gate-deny">' + t.deny + '</button>' +
       '  </div>' +
-      '  <p class="age-gate-foot">Nicotine is an addictive substance. This product is for adults only.</p>' +
+      '  <p class="age-gate-foot">' + t.foot + '</p>' +
       '</div>';
 
     // Self-contained inline styles so the gate renders correctly even before style.css loads.
+    // The scrim is intentionally light (no blur): page content stays readable behind it.
     var css = document.createElement('style');
     css.textContent =
-      '.age-gate-overlay{position:fixed;inset:0;z-index:999999;background:rgba(5,5,12,.94);display:flex;align-items:center;justify-content:center;padding:20px;transition:opacity .22s ease;}' +
+      '.age-gate-overlay{position:fixed;inset:0;z-index:999999;background:rgba(5,5,12,.62);display:flex;align-items:center;justify-content:center;padding:20px;transition:opacity .22s ease;}' +
       '.age-gate-overlay.age-gate-fade{opacity:0;pointer-events:none;}' +
       '.age-gate-modal{background:#0d0d1a;border:1px solid #2a2a4a;border-radius:16px;max-width:440px;width:100%;padding:36px 30px 28px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.6);}' +
       '.age-gate-icon{width:64px;height:64px;margin:0 auto 18px;border-radius:50%;background:linear-gradient(135deg,#00e5ff,#7c3aed);display:flex;align-items:center;justify-content:center;}' +
@@ -93,7 +147,7 @@
       var sep = url.indexOf('?') > -1 ? '&' : '?';
       window.location.href = url + sep + 'agegate=denied';
     } catch (e) {
-      document.body.innerHTML = '<div style="color:#fff;text-align:center;padding:80px 20px;font-family:sans-serif;">You must be 21 or older to access this site.</div>';
+      document.body.innerHTML = '<div style="color:#fff;text-align:center;padding:80px 20px;font-family:sans-serif;">' + t.blocked + '</div>';
     }
   }
 
@@ -170,11 +224,9 @@
 // ===========================================
 document.addEventListener('DOMContentLoaded', function() {
   var pageLang = (function () {
-    var p = window.location.pathname;
-    if (p.indexOf('/de') === 0) return 'de';
-    if (p.indexOf('/pl') === 0) return 'pl';
-    if (p.indexOf('/es') === 0) return 'es';
-    return 'en';
+    // Match the path SEGMENT, not a bare prefix: /ploox-hookah.html is an EN page.
+    var m = /^\/(de|pl|es)(?:\/|$)/.exec(window.location.pathname);
+    return m ? m[1] : 'en';
   })();
   var currency = 'EUR';
 
@@ -575,10 +627,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function showInquirySuccess(form) {
       const path = window.location.pathname;
+      const langMatch = /^\/(de|pl|es)(?:\/|$)/.exec(path);
+      const pageLang = langMatch ? langMatch[1] : 'en';
       let msg;
-      if (path.indexOf('/de') === 0) msg = 'Vielen Dank! Ihre Anfrage wurde gesendet. Wir antworten innerhalb von 1 Werktag.';
-      else if (path.indexOf('/pl') === 0) msg = 'Dziękujemy! Twoje zapytanie zostało wysłane. Odpowiemy w ciągu 1 dnia roboczego.';
-      else if (path.indexOf('/es') === 0) msg = '¡Gracias! Tu consulta ha sido enviada. Responderemos en 1 día hábil.';
+      if (pageLang === 'de') msg = 'Vielen Dank! Ihre Anfrage wurde gesendet. Wir antworten innerhalb von 1 Werktag.';
+      else if (pageLang === 'pl') msg = 'Dziękujemy! Twoje zapytanie zostało wysłane. Odpowiemy w ciągu 1 dnia roboczego.';
+      else if (pageLang === 'es') msg = '¡Gracias! Tu consulta ha sido enviada. Responderemos en 1 día hábil.';
       else msg = 'Thank you! Your inquiry has been sent. We will reply within 1 business day.';
       form.innerHTML =
         '<div style="text-align:center;padding:30px 10px;">' +
